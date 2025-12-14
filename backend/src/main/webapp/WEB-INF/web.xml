@@ -1,0 +1,87 @@
+<web-app xmlns="https://jakarta.ee/xml/ns/jakartaee" version="6.0">
+    <!-- CORS Filter -->
+    <filter>
+        <filter-name>CorsFilter</filter-name>
+        <filter-class>org.apache.catalina.filters.CorsFilter</filter-class>
+        <init-param>
+            <param-name>cors.allowed.origins</param-name>
+            <param-value>http://localhost:5173</param-value>
+        </init-param>
+        <init-param>
+            <param-name>cors.allowed.methods</param-name>
+            <param-value>GET,POST,PUT,DELETE,OPTIONS</param-value>
+        </init-param>
+        <init-param>
+            <param-name>cors.allowed.headers</param-name>
+            <param-value>Content-Type,Authorization</param-value>
+        </init-param>
+        <init-param>
+            <param-name>cors.exposed.headers</param-name>
+            <param-value>Authorization</param-value>
+        </init-param>
+        <init-param>
+            <param-name>cors.support.credentials</param-name>
+            <param-value>true</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>CorsFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+        <dispatcher>REQUEST</dispatcher>
+        <dispatcher>FORWARD</dispatcher>
+        <dispatcher>INCLUDE</dispatcher>
+        <dispatcher>ERROR</dispatcher>
+    </filter-mapping>
+
+    <!-- Servlet for CartInfo -->
+    <servlet>
+        <servlet-name>CartInfoServlet</servlet-name>
+        <servlet-class>com.sejahit.servlet.CartInfoServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>CartInfoServlet</servlet-name>
+        <url-pattern>/api/cartinfo</url-pattern>
+    </servlet-mapping>
+
+
+    <!-- Servlet for Cart -->
+    <servlet>
+        <servlet-name>CartServlet</servlet-name>
+        <servlet-class>com.sejahit.servlet.CartServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>CartServlet</servlet-name>
+        <url-pattern>/api/cart</url-pattern>
+    </servlet-mapping>
+
+    <!-- Servlet for Clothe -->
+    <servlet>
+        <servlet-name>ClotheServlet</servlet-name>
+        <servlet-class>com.sejahit.servlet.ClotheServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ClotheServlet</servlet-name>
+        <url-pattern>/api/clothes</url-pattern>
+    </servlet-mapping>
+
+    <!-- Servlet for Image -->
+    <servlet>
+        <servlet-name>ImageServlet</servlet-name>
+        <servlet-class>com.sejahit.servlet.ImageServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ImageServlet</servlet-name>
+        <url-pattern>/api/images</url-pattern>
+    </servlet-mapping>
+
+    <!-- Servlet for User -->
+    <servlet>
+        <servlet-name>UserServlet</servlet-name>
+        <servlet-class>com.sejahit.servlet.UserServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>UserServlet</servlet-name>
+        <url-pattern>/api/users</url-pattern>
+    </servlet-mapping>
+</web-app>

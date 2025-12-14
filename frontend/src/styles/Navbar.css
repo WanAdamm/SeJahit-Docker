@@ -1,0 +1,81 @@
+/* General Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+}
+
+/* Navbar Container */
+.navbar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  background-color: white;
+  border-bottom: 1px solid #ddd;
+}
+
+/* Logo Section */
+.navbar-left {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.logo {
+  font-size: 20px;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+.tagline {
+  font-size: 12px;
+  color: gray;
+}
+
+/* Menu Section */
+.navbar-menu {
+  list-style-type: none;
+  display: flex;
+  gap: 20px;
+}
+
+.navbar-menu li {
+  position: relative;
+}
+
+.navbar-menu a {
+  text-decoration: none;
+  color: black;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+/* Icons Section */
+.navbar-icons {
+  display: flex;
+  gap: 15px;
+  font-size: 18px;
+}
+
+.navbar-icons i {
+  cursor: pointer;
+}
+
+.navbar-icons i:hover {
+  color: gray;
+}
+
+.navbar-icons a {
+  text-decoration: none; /* Remove underline if present */
+  color: inherit; /* Inherit color for the icons */
+  outline: none; /* Removes the blue outline */
+}
+
+.navbar-icons a:focus {
+  outline: none; /* Ensure the blue outline does not appear on focus */
+}

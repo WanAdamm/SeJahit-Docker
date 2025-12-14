@@ -1,0 +1,63 @@
+/* General styles for the error page */
+.error-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f5f8fa; /* Light background */
+  font-family: Arial, sans-serif;
+}
+
+/* Center container for the error page */
+.error-container {
+  text-align: center;
+  padding: 20px;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Error title */
+.error-title {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+/* Error message */
+.error-message {
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+  color: #555;
+}
+
+/* Action buttons container */
+.error-actions {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
+
+/* Button styles */
+.btn {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 10px 20px;
+  background-color: #333;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.btn:hover {
+  background-color: #555;
+}
+
+.btn span {
+  font-size: 1rem;
+}

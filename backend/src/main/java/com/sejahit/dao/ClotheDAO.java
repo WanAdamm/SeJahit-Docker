@@ -1,0 +1,46 @@
+package com.sejahit.dao;
+
+import com.sejahit.model.Clothe;
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
+
+public class ClotheDAO {
+    public List<Clothe> getAllClothes() throws Exception {
+        List<Clothe> clothes = new ArrayList<>();
+        String query = "SELECT * FROM public.\"Clothe\"";
+
+        try (Connection conn = DatabaseConnection.getConnection();
+                Statement stmt = conn.createStatement();
+                ResultSet rs = stmt.executeQuery(query)) {
+
+            while (rs.next()) {
+                Clothe clothe = new Clothe();
+                clothe.setClotheID(rs.getInt("ClotheID"));
+                clothe.setName(rs.getString("Name"));
+                clothe.setPrice(rs.getInt("Price"));
+                clothe.setAbout(rs.getString("About"));
+                clothe.setImageID(rs.getInt("ImageID"));
+                clothe.setType(rs.getString("Type"));
+                clothes.add(clothe);
+            }
+        }
+        return clothes;
+    }
+
+    public void addClothe(Clothe clothe) throws Exception {
+        String query = "INSERT INTO public.\"Clothe\" (\"Name\", \"Price\", \"About\", \"ImageID\", \"Type\") VALUES (?, ?, ?, ?, ?)";
+
+        try (Connection conn = DatabaseConnection.getConnection();
+                PreparedStatement pstmt = conn.prepareStatement(query)) {
+
+            pstmt.setString(1, clothe.getName()); // Set Name
+            pstmt.setInt(2, clothe.getPrice()); // Set Price
+            pstmt.setString(3, clothe.getAbout()); // Set About
+            pstmt.setInt(4, clothe.getImageID()); // Set ImageID
+            pstmt.setString(5, clothe.getType());
+
+            pstmt.executeUpdate(); // Execute the query
+        }
+    }
+}
