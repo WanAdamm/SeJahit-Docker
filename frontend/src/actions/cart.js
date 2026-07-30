@@ -16,13 +16,13 @@ export async function cartAction({ request }) {
     if (success) {
       toast.success(message, {
         position: "top-center",
-      }); // Show success message
+      });
       return null;
     } else {
       toast.error(message, {
         position: "top-center",
-      }); // Show error message
-      return null; // Stay on the same page
+      });
+      return null;
     }
   }
 }

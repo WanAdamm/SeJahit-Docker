@@ -1,86 +1,57 @@
-import "bootstrap/dist/css/bootstrap.min.css";
-import { useRef } from "react";
-import { Container, Row, Col, Form, Button, Card } from "react-bootstrap";
 import { useFetcher } from "react-router-dom";
 
 const AddProduct = () => {
   const formFetcher = useFetcher();
-  const formRef = useRef();
+  const isSubmitting = formFetcher.state !== "idle";
 
   return (
-    <div>
-      <Container
-        className="d-flex justify-content-center align-items-center"
-        style={{ height: "70vh" }}
-      >
-        <Row>
-          <Col>
-            <Card className="shadow-sm" style={{ width: "24rem" }}>
-              <Card.Body className="text-center">
-                {/* Logo */}
-                <div className="flex justify-center items-center">
-                  <img src="src/assets/logo2.png" alt="Logo" className="mb-1" />
-                </div>
+    <div className="page-shell auth-page add-product-page">
+      <section className="auth-card auth-card--wide" aria-labelledby="add-product-title">
+        <span className="eyebrow">Admin cutting docket</span>
+        <h1 id="add-product-title">Add a piece to the rail.</h1>
+        <p>Give shoppers enough detail to understand the garment before they open the card.</p>
 
-                {/* Login Title */}
-                <h4 className="mb-3 font-bold">Add Your Product</h4>
-                {/* Form */}
-                <formFetcher.Form method="post" action="" ref={formRef}>
-                  {/* Name Field */}
-                  <Form.Group controlId="Name" className="mb-3">
-                    <Form.Control
-                      type="text"
-                      name="name"
-                      placeholder="Name"
-                      className="py-2"
-                      required
-                    />
-                  </Form.Group>
+        <formFetcher.Form method="post" action="" className="studio-form studio-form--grid">
+          <label>
+            Product name
+            <input type="text" name="name" placeholder="Leather jacket" required />
+          </label>
 
-                  {/* Price Field */}
-                  <Form.Group controlId="Price" className="mb-3">
-                    <Form.Control
-                      type="text"
-                      name="price"
-                      placeholder="RM 0"
-                      className="py-2"
-                      required
-                    />
-                  </Form.Group>
+          <label>
+            Price in RM
+            <input type="number" name="price" min="1" step="1" placeholder="75" required />
+          </label>
 
-                  {/* About Field */}
-                  <Form.Group controlId="About" className="mb-3">
-                    <Form.Control
-                      type="text"
-                      name="about"
-                      placeholder="About"
-                      className="py-2"
-                      required
-                    />
-                  </Form.Group>
+          <label className="studio-form__full">
+            Short note
+            <textarea name="about" rows="4" placeholder="Lightly worn, structured shoulder, best for cool evenings." required />
+          </label>
 
-                  {/* Type Field (Dropdown) */}
-                  <Form.Group controlId="Type" className="mb-3">
-                    <Form.Select name="type" required>
-                      <option value="shirt">Shirt</option>
-                      <option value="pants">Pants</option>
-                      <option value="outerwear">Outerwear</option>
-                    </Form.Select>
-                  </Form.Group>
+          <label>
+            Type
+            <select name="type" required defaultValue="outerwear">
+              <option value="outerwear">Outerwear</option>
+              <option value="shirt">Shirt</option>
+              <option value="pants">Pants</option>
+              <option value="skirts">Skirt</option>
+              <option value="top">Top</option>
+              <option value="cap">Cap</option>
+              <option value="scarf">Scarf</option>
+            </select>
+          </label>
 
-                  {/* Hidden Input */}
-                  <input type="hidden" name="_action" value="addClothe" />
+          <label>
+            Image URL
+            <input type="url" name="imagePath" placeholder="https://example.com/piece.jpg" />
+          </label>
 
-                  {/* Submit Button */}
-                  <Button variant="dark" type="submit" className="w-100 py-2">
-                    Add Product
-                  </Button>
-                </formFetcher.Form>
-              </Card.Body>
-            </Card>
-          </Col>
-        </Row>
-      </Container>
+          <input type="hidden" name="_action" value="addClothe" />
+
+          <button type="submit" className="sj-button sj-button--primary studio-form__full" disabled={isSubmitting}>
+            {isSubmitting ? "Adding piece" : "Add piece"}
+          </button>
+        </formFetcher.Form>
+      </section>
     </div>
   );
 };

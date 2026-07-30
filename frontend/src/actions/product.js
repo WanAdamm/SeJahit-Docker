@@ -14,14 +14,14 @@ export async function productAction({ request }) {
     if (success) {
       toast.success(message, {
         position: "top-center",
-      }); // Show success message
+      });
 
-      return redirect("/"); // redirect the user after adding item to cart to ensure the user can only add it once
+      return redirect("/cart");
     } else {
       toast.error(message, {
         position: "top-center",
-      }); // Show error message
-      return null; // Stay on the same page
+      });
+      return null;
     }
   }
 }

@@ -3,6 +3,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 // Library
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import "./App.css";
 
 // pages
 import Main from "./layouts/Main";
@@ -16,7 +17,6 @@ import { addClothesAction } from "./actions/addClothes";
 
 // Routes
 import HomePage from "./pages/HomePage";
-import TestPage from "./pages/TestPage";
 import Error from "./pages/Error";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
@@ -26,7 +26,6 @@ import SearchResultPage from "./pages/SearchResultPage";
 import AddProduct from "./pages/AddProduct";
 
 // Loaders
-import { testLoader } from "./loaders/TestLoader";
 import { loginLoader } from "./loaders/LoginLoader";
 import { mainLoader } from "./loaders/MainLoader";
 import { homeLoader } from "./loaders/HomeLoader";
@@ -35,6 +34,7 @@ import { productLoader } from "./loaders/ProductLoader";
 import { cartInfoLoader } from "./loaders/CartLoader";
 import { cartAction } from "./actions/cart";
 import { searchResultLoader } from "./loaders/SearchResultLoader";
+import { addProductLoader } from "./loaders/AddProductLoader";
 
 const router = createBrowserRouter([
   {
@@ -55,20 +55,21 @@ const router = createBrowserRouter([
         element: <ProductPage />,
         loader: productLoader,
         action: productAction,
-        errorElement: <Error />
+        errorElement: <Error />,
       },
       {
-        path: "/add product",
-        element: <AddProduct/>,
+        path: "add-product",
+        element: <AddProduct />,
+        loader: addProductLoader,
         action: addClothesAction,
-        errorElement: <Error />
+        errorElement: <Error />,
       },
       {
-        path: "/:type",
+        path: ":type",
         element: <ProductPage />,
         loader: productLoader,
         action: productAction,
-        errorElement: <Error />
+        errorElement: <Error />,
       },
       {
         path: "search",
@@ -100,12 +101,6 @@ const router = createBrowserRouter([
       {
         path: "logout",
         action: logoutAction,
-        errorElement: <Error />,
-      },
-      {
-        path: "test",
-        element: <TestPage />,
-        loader: testLoader,
         errorElement: <Error />,
       },
     ],

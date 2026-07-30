@@ -1,11 +1,4 @@
-import { useRouteError, Link, useNavigate } from "react-router-dom";
-
-// library imports
-import { HiArrowUturnLeft } from "react-icons/hi2";
-import { IoHomeOutline } from "react-icons/io5";
-
-// styling
-import "../styles/Error.css"
+import { Link, useNavigate, useRouteError } from "react-router-dom";
 
 const Error = () => {
   const error = useRouteError();
@@ -13,21 +6,21 @@ const Error = () => {
 
   return (
     <div className="error-page">
-      <div className="error-container">
-        <h1 className="error-title">Uh oh! We’ve got a problem.</h1>
-        <p className="error-message">{error?.message || "Not Found"}</p>
-        <div className="error-actions">
-          <button className="btn btn-dark d-flex" onClick={() => navigate(-1)}>
-            <HiArrowUturnLeft size={20} />
-            <span>Go Back</span>
+      <section className="error-card" aria-labelledby="error-title">
+        <span className="eyebrow">Loose thread</span>
+        <h1 id="error-title">This seam did not hold.</h1>
+        <p>{error?.message || "The page could not be found."}</p>
+        <div className="error-card__actions">
+          <button className="sj-button sj-button--ghost" onClick={() => navigate(-1)}>
+            Go back
           </button>
-          <Link to="/" className="btn btn-dark d-flex">
-            <IoHomeOutline size={20} />
-            <span>Go home</span>
+          <Link to="/" className="sj-button sj-button--primary">
+            Go home
           </Link>
         </div>
-      </div>
+      </section>
     </div>
   );
 };
+
 export default Error;

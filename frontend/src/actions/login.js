@@ -16,14 +16,13 @@ export async function loginAction({ request }) {
     const { success, message } = await login({ username, password });
 
     if (success) {
-      // Save the username in the context
-       localStorage.setItem("username", JSON.stringify(username)) // Save username in localStorage
+      localStorage.setItem("username", JSON.stringify(username));
 
-      toast.success(message); // Show success message
-      return redirect("/"); // Redirect to the homepage or dashboard
+      toast.success(message);
+      return redirect("/");
     } else {
-      toast.error(message); // Show error message
-      return null; // Stay on the same page
+      toast.error(message);
+      return null;
     }
   }
 }

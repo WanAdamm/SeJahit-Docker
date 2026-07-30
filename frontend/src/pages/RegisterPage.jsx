@@ -1,88 +1,43 @@
-import "bootstrap/dist/css/bootstrap.min.css";
-import { useRef } from "react";
-import { Container, Row, Col, Form, Button, Card } from "react-bootstrap";
-import { useFetcher } from "react-router-dom";
+import { Link, useFetcher } from "react-router-dom";
 
 const RegisterPage = () => {
   const formFetcher = useFetcher();
-  const formRef = useRef();
+  const isSubmitting = formFetcher.state !== "idle";
 
   return (
-    <div>
-      <Container
-        className="d-flex justify-content-center align-items-center"
-        style={{ height: "70vh" }}
-      >
-        <Row>
-          <Col>
-            <Card className="shadow-sm" style={{ width: "24rem" }}>
-              <Card.Body className="text-center">
-                {/* Logo */}
-                <div className="flex justify-center items-center">
-                  <img src="src/assets/logo2.png" alt="Logo" className="mb-1" />
-                </div>
+    <div className="page-shell auth-page">
+      <section className="auth-card" aria-labelledby="register-title">
+        <span className="eyebrow">New wearer</span>
+        <h1 id="register-title">Create your SeJahit rail account.</h1>
+        <p>Use it to hold pieces in your cart while you compare what fits your wardrobe.</p>
 
-                {/* Login Title */}
-                <h4 className="mb-3 font-bold">Register</h4>
-                {/* Form */}
-                <formFetcher.Form method="post" action="" ref={formRef}>
-                  {/* Name Field */}
-                  <Form.Group controlId="Name" className="mb-3">
-                    <Form.Control
-                      type="text"
-                      name="name"
-                      placeholder="name"
-                      className="py-2"
-                      required
-                    />
-                  </Form.Group>
+        <formFetcher.Form method="post" action="" className="studio-form">
+          <label>
+            Name
+            <input type="text" name="name" autoComplete="name" required />
+          </label>
 
-                  {/* Username Field */}
-                  <Form.Group controlId="Username" className="mb-3">
-                    <Form.Control
-                      type="text"
-                      name="username"
-                      placeholder="Username"
-                      className="py-2"
-                      required
-                    />
-                  </Form.Group>
+          <label>
+            Username
+            <input type="text" name="username" autoComplete="username" required />
+          </label>
 
-                  {/* Password Field */}
-                  <Form.Group controlId="Password" className="mb-3">
-                    <Form.Control
-                      type="password"
-                      name="password"
-                      placeholder="Password"
-                      className="py-2"
-                      required
-                    />
-                  </Form.Group>
+          <label>
+            Password
+            <input type="password" name="password" autoComplete="new-password" required />
+          </label>
 
-                  {/* Hidden Input */}
-                  <input type="hidden" name="_action" value="register" />
+          <input type="hidden" name="_action" value="register" />
 
-                  {/* Submit Button */}
-                  <Button variant="dark" type="submit" className="w-100 py-2">
-                    Register
-                  </Button>
-                </formFetcher.Form>
+          <button type="submit" className="sj-button sj-button--primary" disabled={isSubmitting}>
+            {isSubmitting ? "Creating account" : "Create account"}
+          </button>
+        </formFetcher.Form>
 
-                {/* Privacy */}
-                <p className="mt-3 mb-0">
-                  <a
-                    href="#privacy"
-                    className="text-muted"
-                    style={{ fontSize: "0.9rem" }}
-                  >
-                    Privacy
-                  </a>
-                </p>
-              </Card.Body>
-            </Card>
-          </Col>
-        </Row>
-      </Container>
+        <Link to="/login" className="auth-card__link">
+          I already have an account
+        </Link>
+      </section>
     </div>
   );
 };

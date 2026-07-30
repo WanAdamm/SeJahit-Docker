@@ -1,86 +1,31 @@
-import "../styles/Footer.css";
-import { BsInstagram, BsTiktok, BsFacebook, BsYoutube } from "react-icons/bs";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
-    <footer className="footer">
-      <div className="footer-container">
-        <div className="footer-section">
-          <h4>EXPLORE</h4>
-          <ul>
-            <li>
-              <a href="#about-us">About Us</a>
-            </li>
-            <li>
-              <a href="#stores">Physical Stores</a>
-            </li>
-            <li>
-              <a href="#care">Care Instructions</a>
-            </li>
-          </ul>
-        </div>
-        <div className="footer-section">
-          <h4>CUSTOMER SERVICE</h4>
-          <ul>
-            <li>
-              <a href="#faq">FAQ</a>
-            </li>
-            <li>
-              <a href="https://www.tracking.my/">Track Your Order</a>
-            </li>
-            <li>
-              <a href="#contact-us">Contact Us</a>
-            </li>
-            <li>
-              <a href="#guideline">Purchase Guideline</a>
-            </li>
-            <li>
-              <a href="#shipping-policy">Shipping Policy</a>
-            </li>
-            <li>
-              <a href="#return-policy">Return Policy</a>
-            </li>
-            <li>
-              <a href="#refund-policy">Refund Policy</a>
-            </li>
-            <li>
-              <a href="#terms-service">Terms of Service</a>
-            </li>
-            <li>
-              <a href="#privacy-policy">Privacy Policy</a>
-            </li>
-          </ul>
-        </div>
-        <div className="footer-section">
-          <h4>SIGN UP FOR OUR NEWSLETTER</h4>
-          <p>
-            Subscribe and get to know the latest launches and exclusive deals
-          </p>
-          <form className="newsletter-form">
-            <input type="email" placeholder="Enter your email" />
-            <button type="submit">Subscribe</button>
-          </form>
-          <div className="social-icons flex">
-            <a href="#instagram">
-              <i className="fab fa-instagram"><BsInstagram size={25}/></i>
-            </a>
-            <a href="#facebook">
-              <i className="fab fa-facebook"><BsFacebook size={25}/></i>
-            </a>
-            <a href="#youtube">
-              <i className="fab fa-youtube"><BsYoutube size={25}/></i>
-            </a>
-            <a href="#tiktok">
-              <i className="fab fa-tiktok"><BsTiktok size={25}/></i>
-            </a>
-          </div>
-        </div>
-      </div>
-      <div className="footer-bottom">
+    <footer className="sj-footer">
+      <div className="sj-footer__story">
+        <span className="sj-footer__stamp">Cut, kept, re-worn</span>
         <p>
-          © 2024 SeJahit by SJ (M) SDN BHD (2564651036631). All Rights
-          Reserved.
+          SeJahit keeps pre-loved clothes moving through another wardrobe instead of
+          another landfill run.
         </p>
+      </div>
+
+      <div className="sj-footer__grid">
+        <div>
+          <h2>Shop the rail</h2>
+          <Link to="/outerwear">Outerwear</Link>
+          <Link to="/shirt">Shirts</Link>
+          <Link to="/pants">Pants</Link>
+        </div>
+        <div>
+          <h2>How to choose</h2>
+          <p>Read the about note, check the type, and add only the pieces you would wear twice.</p>
+        </div>
+        <div>
+          <h2>Care note</h2>
+          <p>Wash gently, mend early, and let the next owner know what the garment has lived through.</p>
+        </div>
       </div>
     </footer>
   );

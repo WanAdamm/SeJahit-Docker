@@ -16,14 +16,18 @@ public class CartInfoDAO {
         "    u.\"ID\"        AS \"UserID\", " +
         "    c.\"CartID\"    AS \"CartID\", " +
         "    c.\"ClotheID\"  AS \"ClotheID\", " +
+        "    cl.\"ImageID\"  AS \"ImageID\", " +
         "    cl.\"Name\"     AS \"ClotheName\", " +
         "    cl.\"Price\"    AS \"Price\", " +
-        "    cl.\"About\"    AS \"About\" " +
+        "    cl.\"About\"    AS \"About\", " +
+        "    i.\"ImagePath\" AS \"ImagePath\" " +
         "FROM public.\"Cart\" c " +
         "LEFT JOIN public.\"Users\" u " +
         "       ON u.\"ID\" = c.\"ID\" " +
         "JOIN public.\"Clothe\" cl " +
-        "     ON c.\"ClotheID\" = cl.\"ClotheID\";";
+        "     ON c.\"ClotheID\" = cl.\"ClotheID\" " +
+        "LEFT JOIN public.\"Image\" i " +
+        "       ON i.\"ImageID\" = cl.\"ImageID\";";
 
         try (Connection conn = DatabaseConnection.getConnection();
                 Statement stmt = conn.createStatement();
@@ -34,7 +38,9 @@ public class CartInfoDAO {
                 cartInfo.setId(rs.getInt("UserID"));
                 cartInfo.setCartID(rs.getInt("CartID"));
                 cartInfo.setClotheID(rs.getInt("ClotheID"));
+                cartInfo.setImageID(rs.getInt("ImageID"));
                 cartInfo.setClotheName(rs.getString("ClotheName"));
+                cartInfo.setImagePath(rs.getString("ImagePath"));
                 cartInfo.setPrice(rs.getInt("Price"));
                 cartInfo.setAbout(rs.getString("About"));
                 cartInfos.add(cartInfo);

@@ -1,81 +1,38 @@
-import "bootstrap/dist/css/bootstrap.min.css";
-import { useRef } from "react";
-import { Container, Row, Col, Form, Button, Card } from "react-bootstrap";
-import { useFetcher, Link } from "react-router-dom";
+import { Link, useFetcher } from "react-router-dom";
 
 const LoginPage = () => {
   const formFetcher = useFetcher();
-  const formRef = useRef();
+  const isSubmitting = formFetcher.state !== "idle";
 
   return (
-    <div>
-      <Container
-        className="d-flex justify-content-center align-items-center"
-        style={{ height: "70vh" }}
-      >
-        <Row>
-          <Col>
-            <Card className="shadow-sm" style={{ width: "24rem" }}>
-              <Card.Body className="text-center">
-                {/* Logo */}
-                <div className="flex justify-center items-center">
-                  <img src="src/assets/logo2.png" alt="Logo" className="mb-1" />
-                </div>
+    <div className="page-shell auth-page">
+      <section className="auth-card" aria-labelledby="login-title">
+        <span className="eyebrow">Member rail</span>
+        <h1 id="login-title">Log in to hold a piece.</h1>
+        <p>Saved pieces leave the public rail until you remove them from your cart.</p>
 
-                {/* Login Title */}
-                <h4 className="mb-3 font-bold">Log in</h4>
-                {/* Form */}
-                <formFetcher.Form method="post" action="" ref={formRef}>
-                  {/* Username Field */}
-                  <Form.Group controlId="Username" className="mb-3">
-                    <Form.Control
-                      type="text"
-                      name="username"
-                      placeholder="Username"
-                      className="py-2"
-                      required
-                    />
-                  </Form.Group>
+        <formFetcher.Form method="post" action="" className="studio-form">
+          <label>
+            Username
+            <input type="text" name="username" autoComplete="username" required />
+          </label>
 
-                  {/* Password Field */}
-                  <Form.Group controlId="Password" className="mb-3">
-                    <Form.Control
-                      type="password"
-                      name="password"
-                      placeholder="Password"
-                      className="py-2"
-                      required
-                    />
-                  </Form.Group>
+          <label>
+            Password
+            <input type="password" name="password" autoComplete="current-password" required />
+          </label>
 
-                  {/* Hidden Input */}
-                  <input type="hidden" name="_action" value="login" />
+          <input type="hidden" name="_action" value="login" />
 
-                  {/* Submit Button */}
-                  <Button variant="dark" type="submit" className="w-100 py-2">
-                    Log In
-                  </Button>
+          <button type="submit" className="sj-button sj-button--primary" disabled={isSubmitting}>
+            {isSubmitting ? "Logging in" : "Log in"}
+          </button>
+        </formFetcher.Form>
 
-                  <Link to="/register" className="text-black no-underline">
-                    <p>No account? Register instead.</p>
-                  </Link>
-                </formFetcher.Form>
-
-                {/* Privacy */}
-                <p className="mt-3 mb-0">
-                  <a
-                    href="#privacy"
-                    className="text-muted"
-                    style={{ fontSize: "0.9rem" }}
-                  >
-                    Privacy
-                  </a>
-                </p>
-              </Card.Body>
-            </Card>
-          </Col>
-        </Row>
-      </Container>
+        <Link to="/register" className="auth-card__link">
+          Create an account
+        </Link>
+      </section>
     </div>
   );
 };

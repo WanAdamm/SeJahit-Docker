@@ -34,9 +34,9 @@ public class ImageServlet extends HttpServlet {
         resp.setContentType("application/json");
         try {
             Image image = new Gson().fromJson(req.getReader(), Image.class);
-            imageDAO.addImage(image);
+            Image createdImage = imageDAO.addImage(image);
             resp.setStatus(HttpServletResponse.SC_CREATED);
-            resp.getWriter().write("{\"message\": \"POST request processed successfully.\"}");
+            resp.getWriter().write(new Gson().toJson(createdImage));
         } catch (Exception e) {
             resp.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
         }

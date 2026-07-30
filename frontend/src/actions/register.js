@@ -13,15 +13,14 @@ export async function registerAction({ request }) {
     const password = values.password; // Matches the name attribute in the form
     const name = values.name; // Matches the name attribute in the form
 
-    // Call the login helper function
     const { success, message } = await register({ username, password, name });
 
     if (success) {
-      toast.success(message); // Show success message
-      return redirect("/login"); // Redirect to the homepage or dashboard
+      toast.success(message);
+      return redirect("/login");
     } else {
-      toast.error(message); // Show error message
-      return null; // Stay on the same page
+      toast.error(message);
+      return null;
     }
   }
 }

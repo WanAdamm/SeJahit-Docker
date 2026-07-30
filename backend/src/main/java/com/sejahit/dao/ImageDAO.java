@@ -17,20 +17,25 @@ public class ImageDAO {
             while (rs.next()) {
                 Image image = new Image();
                 image.setImageID(rs.getInt("ImageID"));
-                image.setImageData(rs.getBytes("ImageData"));
+                image.setImagePath(rs.getString("ImagePath"));
                 images.add(image);
             }
         }
         return images;
     }
 
-    public void addImage(Image image) throws Exception {
-        String query = "INSERT INTO public.\"Image\" (\"ImageData\") VALUES (?)";
+    public Image addImage(Image image) throws Exception {
+        String query = "INSERT INTO public.\"Image\" (\"ImagePath\") VALUES (?) RETURNING \"ImageID\"";
 
         try (Connection conn = DatabaseConnection.getConnection();
                 PreparedStatement pstmt = conn.prepareStatement(query)) {
-            pstmt.setBytes(1, image.getImageData());
-            pstmt.executeUpdate();
+            pstmt.setString(1, image.getImagePath());
+            try (ResultSet rs = pstmt.executeQuery()) {
+                if (rs.next()) {
+                    image.setImageID(rs.getInt("ImageID"));
+                }
+            }
         }
+        return image;
     }
 }

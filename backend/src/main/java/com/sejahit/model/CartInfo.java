@@ -4,7 +4,9 @@ public class CartInfo {
     private int id;
     private int CartID;
     private int ClotheID;
+    private int ImageID;
     private String clotheName;
+    private String imagePath;
     private int price;
     private String about;
     
@@ -35,6 +37,14 @@ public class CartInfo {
         ClotheID = clotheID;
     }
 
+    public int getImageID() {
+        return ImageID;
+    }
+
+    public void setImageID(int imageID) {
+        ImageID = imageID;
+    }
+
     // Getter and Setter for clotheName
     public String getClotheName() {
         return clotheName;
@@ -42,6 +52,14 @@ public class CartInfo {
 
     public void setClotheName(String clotheName) {
         this.clotheName = clotheName;
+    }
+
+    public String getImagePath() {
+        return imagePath;
+    }
+
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
     }
 
     // Getter and Setter for price

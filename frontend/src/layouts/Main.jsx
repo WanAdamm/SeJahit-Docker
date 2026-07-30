@@ -6,11 +6,16 @@ const Main = () => {
   const { username, isLoggedIn, totalCartItem, isAdmin } = useLoaderData();
   return (
     <div className="layout">
-      <Navbar username={username} isLoggedIn={isLoggedIn} totalCartItem={totalCartItem} isAdmin={isAdmin}/>
+      <Navbar
+        username={username}
+        isLoggedIn={isLoggedIn}
+        totalCartItem={totalCartItem}
+        isAdmin={isAdmin}
+      />
       <main>
         <Outlet />
       </main>
-    <Footer/>
+      <Footer />
     </div>
   );
 };

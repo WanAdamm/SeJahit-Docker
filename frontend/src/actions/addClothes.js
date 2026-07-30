@@ -1,6 +1,6 @@
 import { redirect } from "react-router-dom";
 import { toast } from "react-toastify";
-import { addProduct } from "../helpers";
+import { addProduct, fetchAllUsers, fetchData } from "../helpers";
 
 export async function addClothesAction({ request }) {
   // Parse form data from the request
@@ -8,37 +8,46 @@ export async function addClothesAction({ request }) {
   const { _action, ...values } = Object.fromEntries(formData);
 
   if (_action === "addClothe") {
-    // Extract form data
     const name = values.name;
     const price = values.price;
     const about = values.about;
     const type = values.type;
+    const imagePath = values.imagePath;
 
     try {
+      const username = fetchData("username") || null;
+      const users = await fetchAllUsers();
+      const user = users.find((item) => item.username === username);
 
-      // Add the product with the returned ImageID
+      if (!user?.isAdmin) {
+        toast.error("Only admins can add pieces.", {
+          position: "top-center",
+        });
+        return redirect("/");
+      }
+
       const { success, message } = await addProduct({
         name,
         price,
         about,
         type,
+        imagePath,
       });
 
       if (success) {
         toast.success(message, {
           position: "top-center",
-        }); // Show success message
+        });
 
-        return redirect("/"); // Redirect the user after adding the item
+        return redirect("/");
       } else {
         toast.error(message, {
           position: "top-center",
-        }); // Show error message
-        return null; // Stay on the same page
+        });
+        return null;
       }
-    } catch (error) {
-      console.error("Error adding product:", error);
-      toast.error("An unexpected error occurred.", {
+    } catch {
+      toast.error("The product could not be added.", {
         position: "top-center",
       });
       return null;
