@@ -27,7 +27,7 @@ const Navbar = ({ username, isLoggedIn, totalCartItem, isAdmin }) => {
               {category.label}
             </Link>
           ))}
-          {isAdmin ? <Link to="/add-product">Add piece</Link> : null}
+          {isAdmin ? <Link to="/add-product">Admin</Link> : null}
         </div>
 
         <Form method="get" action="/search" className="sj-search" role="search">

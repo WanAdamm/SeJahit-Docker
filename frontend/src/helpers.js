@@ -107,10 +107,15 @@ export const fetchAllClothes = async () => {
   return apiHelper(CLOTHE_URL);
 };
 
+const adminHeaders = () => ({
+  "Content-Type": "application/json",
+  "X-Username": fetchData("username") || "",
+});
+
 export const createClothe = async (clothe) => {
   return apiHelper(CLOTHE_URL, {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
+    headers: adminHeaders(),
     body: JSON.stringify(clothe),
   });
 };
@@ -118,13 +123,13 @@ export const createClothe = async (clothe) => {
 export const updateClothe = async (id, clothe) => {
   return apiHelper(`${CLOTHE_URL}/${id}`, {
     method: "PUT",
-    headers: { "Content-Type": "application/json" },
+    headers: adminHeaders(),
     body: JSON.stringify(clothe),
   });
 };
 
 export const deleteClothe = async (id) => {
-  return apiHelper(`${CLOTHE_URL}/${id}`, { method: "DELETE" });
+  return apiHelper(`${CLOTHE_URL}/${id}`, { method: "DELETE", headers: adminHeaders() });
 };
 
 export const getMatchingClothe = async (clothes, parameter) => {
@@ -250,6 +255,39 @@ export const addProduct = async ({ name, price, about, type, imagePath }) => {
       success: false,
       message: "The product could not be added.",
     };
+  }
+};
+
+export const updateProduct = async ({ ClotheID, name, price, about, type, imagePath, ImageID }) => {
+  try {
+    const normalizedPrice = Number(price);
+
+    if (!ClotheID || !name?.trim() || Number.isNaN(normalizedPrice) || normalizedPrice <= 0) {
+      return { success: false, message: "Add a name and a valid price." };
+    }
+
+    const image = imagePath?.trim() ? await addImage({ imagePath }) : { ImageID };
+
+    await updateClothe(ClotheID, {
+      name: name.trim(),
+      price: Math.round(normalizedPrice),
+      about: about?.trim() || "One-of-one SeJahit find.",
+      ImageID: Number(image.ImageID) || 0,
+      type,
+    });
+
+    return { success: true, message: "Product updated." };
+  } catch {
+    return { success: false, message: "The product could not be updated." };
+  }
+};
+
+export const removeProduct = async ({ ClotheID }) => {
+  try {
+    await deleteClothe(ClotheID);
+    return { success: true, message: "Product deleted." };
+  } catch {
+    return { success: false, message: "The product could not be deleted." };
   }
 };
 

@@ -40,4 +40,16 @@ public class UserDAO {
             pstmt.executeUpdate();
         }
     }
+
+    public boolean isAdmin(String username) throws Exception {
+        String query = "SELECT \"Admin\" FROM public.\"Users\" WHERE \"Username\" = ?";
+
+        try (Connection conn = DatabaseConnection.getConnection();
+                PreparedStatement pstmt = conn.prepareStatement(query)) {
+            pstmt.setString(1, username);
+            try (ResultSet rs = pstmt.executeQuery()) {
+                return rs.next() && rs.getBoolean("Admin");
+            }
+        }
+    }
 }

@@ -43,4 +43,32 @@ public class ClotheDAO {
             pstmt.executeUpdate(); // Execute the query
         }
     }
+
+    public boolean updateClothe(int clotheID, Clothe clothe) throws Exception {
+        String query = "UPDATE public.\"Clothe\" SET \"Name\" = ?, \"Price\" = ?, \"About\" = ?, \"ImageID\" = ?, \"Type\" = ? WHERE \"ClotheID\" = ?";
+
+        try (Connection conn = DatabaseConnection.getConnection();
+                PreparedStatement pstmt = conn.prepareStatement(query)) {
+
+            pstmt.setString(1, clothe.getName());
+            pstmt.setInt(2, clothe.getPrice());
+            pstmt.setString(3, clothe.getAbout());
+            pstmt.setInt(4, clothe.getImageID());
+            pstmt.setString(5, clothe.getType());
+            pstmt.setInt(6, clotheID);
+
+            return pstmt.executeUpdate() > 0;
+        }
+    }
+
+    public boolean deleteClothe(int clotheID) throws Exception {
+        String query = "DELETE FROM public.\"Clothe\" WHERE \"ClotheID\" = ?";
+
+        try (Connection conn = DatabaseConnection.getConnection();
+                PreparedStatement pstmt = conn.prepareStatement(query)) {
+
+            pstmt.setInt(1, clotheID);
+            return pstmt.executeUpdate() > 0;
+        }
+    }
 }

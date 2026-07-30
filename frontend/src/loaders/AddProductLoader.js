@@ -1,5 +1,5 @@
 import { redirect } from "react-router-dom";
-import { fetchAllUsers, fetchData } from "../helpers";
+import { fetchAllClothes, fetchAllImages, fetchAllUsers, fetchData } from "../helpers";
 
 export async function addProductLoader() {
   const username = fetchData("username") || null;
@@ -15,5 +15,8 @@ export async function addProductLoader() {
     return redirect("/");
   }
 
-  return { user };
+  const clothes = await fetchAllClothes();
+  const images = await fetchAllImages();
+
+  return { user, clothes, images };
 }

@@ -13,7 +13,7 @@
         </init-param>
         <init-param>
             <param-name>cors.allowed.headers</param-name>
-            <param-value>Content-Type,Authorization</param-value>
+            <param-value>Content-Type,Authorization,X-Username</param-value>
         </init-param>
         <init-param>
             <param-name>cors.exposed.headers</param-name>
@@ -63,6 +63,10 @@
     <servlet-mapping>
         <servlet-name>ClotheServlet</servlet-name>
         <url-pattern>/api/clothes</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ClotheServlet</servlet-name>
+        <url-pattern>/api/clothes/*</url-pattern>
     </servlet-mapping>
 
     <!-- Servlet for Image -->
