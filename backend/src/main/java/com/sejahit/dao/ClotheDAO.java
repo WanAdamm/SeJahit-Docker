@@ -37,7 +37,7 @@ public class ClotheDAO {
             pstmt.setString(1, clothe.getName()); // Set Name
             pstmt.setInt(2, clothe.getPrice()); // Set Price
             pstmt.setString(3, clothe.getAbout()); // Set About
-            pstmt.setInt(4, clothe.getImageID()); // Set ImageID
+            pstmt.setObject(4, clothe.getImageID() == 0 ? null : clothe.getImageID(), Types.INTEGER);
             pstmt.setString(5, clothe.getType());
 
             pstmt.executeUpdate(); // Execute the query
@@ -53,7 +53,7 @@ public class ClotheDAO {
             pstmt.setString(1, clothe.getName());
             pstmt.setInt(2, clothe.getPrice());
             pstmt.setString(3, clothe.getAbout());
-            pstmt.setInt(4, clothe.getImageID());
+            pstmt.setObject(4, clothe.getImageID() == 0 ? null : clothe.getImageID(), Types.INTEGER);
             pstmt.setString(5, clothe.getType());
             pstmt.setInt(6, clotheID);
 
